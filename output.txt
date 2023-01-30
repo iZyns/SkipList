@@ -1,0 +1,493 @@
+Mon Nov 28 00:37:15 UTC 2022
+Linux LinuxMachine 5.10.16.3-microsoft-standard-WSL2 #1 SMP Fri Apr 2 22:23:49 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+uid=1000(cssuwbstudent) gid=1000(cssuwbstudent) groups=1000(cssuwbstudent),10(wheel)
+=====================================================
+1. Compiles without warnings with -Wall -Wextra flags
+=====================================================
+=====================================================
+2. Runs and produces correct output
+=====================================================
+test1 done.
+test2 done.
+test3 done.
+test4 done.
+Done.
+=====================================================
+3. clang-tidy warnings are fixed
+=====================================================
+11526 warnings and 1 error generated.
+Error while processing /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/main.cpp.
+16073 warnings and 2 errors generated.
+Error while processing /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/random.cpp.
+30326 warnings and 3 errors generated.
+Error while processing /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/skiplist.cpp.
+/home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/skiplist.cpp:39:20: error: 2 adjacent parameters of 'SkipList' of similar type ('int') are easily swapped by mistake [bugprone-easily-swappable-parameters,-warnings-as-errors]
+SkipList::SkipList(int levels, int probability) {
+                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/skiplist.cpp:39:24: note: the first parameter in the range is 'levels'
+SkipList::SkipList(int levels, int probability) {
+                       ^~~~~~
+/home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/skiplist.cpp:39:36: note: the last parameter in the range is 'probability'
+SkipList::SkipList(int levels, int probability) {
+                                   ^~~~~~~~~~~
+/usr/include/wchar.h:35:10: error: 'stddef.h' file not found [clang-diagnostic-error]
+#include <stddef.h>
+         ^~~~~~~~~~
+/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/bits/cxxabi_init_exception.h:38:10: error: 'stddef.h' file not found [clang-diagnostic-error]
+#include <stddef.h>
+         ^~~~~~~~~~
+Suppressed 30325 warnings (30325 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+1 warning treated as error
+=====================================================
+4. clang-format does not find any formatting issues
+=====================================================
+Running clang-format on ./main.cpp
+Running clang-format on ./random.cpp
+Running clang-format on ./skiplist.cpp
+=====================================================
+5. No memory leaks using g++
+=====================================================
+
+=================================================================
+==19980==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 64 byte(s) in 2 object(s) allocated from:
+    #0 0x7fe823b7a7b0 in operator new(unsigned long) (/lib64/libasan.so.5+0xf17b0)
+    #1 0x406a99 in SkipList::SkipList(SkipList const&) /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/skiplist.cpp:60
+    #2 0x40482b in test4() /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/main.cpp:118
+    #3 0x404ed7 in main /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/main.cpp:143
+    #4 0x7fe822dcfcf2 in __libc_start_main (/lib64/libc.so.6+0x3acf2)
+
+Indirect leak of 144 byte(s) in 6 object(s) allocated from:
+    #0 0x7fe823b7a7b0 in operator new(unsigned long) (/lib64/libasan.so.5+0xf17b0)
+    #1 0x40c0dc in __gnu_cxx::new_allocator<SNode*>::allocate(unsigned long, void const*) /usr/include/c++/8/ext/new_allocator.h:111
+    #2 0x40b804 in std::allocator_traits<std::allocator<SNode*> >::allocate(std::allocator<SNode*>&, unsigned long) /usr/include/c++/8/bits/alloc_traits.h:436
+    #3 0x40a8a5 in std::_Vector_base<SNode*, std::allocator<SNode*> >::_M_allocate(unsigned long) /usr/include/c++/8/bits/stl_vector.h:296
+    #4 0x408d85 in std::vector<SNode*, std::allocator<SNode*> >::_M_default_append(unsigned long) /usr/include/c++/8/bits/vector.tcc:604
+    #5 0x408342 in std::vector<SNode*, std::allocator<SNode*> >::resize(unsigned long) /usr/include/c++/8/bits/stl_vector.h:827
+    #6 0x406234 in SNode::SNode(int) /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/skiplist.cpp:32
+    #7 0x406ae1 in SkipList::SkipList(SkipList const&) /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/skiplist.cpp:60
+    #8 0x40482b in test4() /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/main.cpp:118
+    #9 0x404ed7 in main /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/main.cpp:143
+    #10 0x7fe822dcfcf2 in __libc_start_main (/lib64/libc.so.6+0x3acf2)
+
+Indirect leak of 128 byte(s) in 4 object(s) allocated from:
+    #0 0x7fe823b7a7b0 in operator new(unsigned long) (/lib64/libasan.so.5+0xf17b0)
+    #1 0x406a99 in SkipList::SkipList(SkipList const&) /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/skiplist.cpp:60
+    #2 0x40482b in test4() /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/main.cpp:118
+    #3 0x404ed7 in main /home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/main.cpp:143
+    #4 0x7fe822dcfcf2 in __libc_start_main (/lib64/libc.so.6+0x3acf2)
+
+SUMMARY: AddressSanitizer: 336 byte(s) leaked in 12 allocation(s).
+=====================================================
+6. No memory leaks using valgrind, look for "definitely lost" 
+=====================================================
+==20002== Memcheck, a memory error detector
+==20002== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==20002== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==20002== Command: ./a.out
+==20002== Parent PID: 19853
+==20002== 
+==20002== 
+==20002== HEAP SUMMARY:
+==20002==     in use at exit: 336 bytes in 12 blocks
+==20002==   total heap usage: 213 allocs, 201 frees, 84,794 bytes allocated
+==20002== 
+==20002== LEAK SUMMARY:
+==20002==    definitely lost: 64 bytes in 2 blocks
+==20002==    indirectly lost: 272 bytes in 10 blocks
+==20002==      possibly lost: 0 bytes in 0 blocks
+==20002==    still reachable: 0 bytes in 0 blocks
+==20002==         suppressed: 0 bytes in 0 blocks
+==20002== Rerun with --leak-check=full to see details of leaked memory
+==20002== 
+==20002== For lists of detected and suppressed errors, rerun with: -s
+==20002== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+=====================================================
+7. Tests have full code coverage
+=====================================================
+File '/home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/main.cpp':
+Name                        Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
+-------------------------------------------------------------------------------------------------------
+test1()                           1       0 100.00%        22       6  72.73%         0       0   0.00%
+test2()                           1       0 100.00%        15       2  86.67%         0       0   0.00%
+test3()                           1       0 100.00%        29       8  72.41%         0       0   0.00%
+test4()                           1       0 100.00%        24       6  75.00%         0       0   0.00%
+main                              1       0 100.00%         8       0 100.00%         0       0   0.00%
+-------------------------------------------------------------------------------------------------------
+TOTAL                             5       0 100.00%        98      22  77.55%         0       0   0.00%
+
+File '/home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/random.cpp':
+Name                        Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
+-------------------------------------------------------------------------------------------------------
+Random::random()                  3       1  66.67%         6       2  66.67%         2       1  50.00%
+-------------------------------------------------------------------------------------------------------
+TOTAL                             3       1  66.67%         6       2  66.67%         2       1  50.00%
+
+File '/home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/skiplist.cpp':
+Name                                                           Regions    Miss   Cover     Lines    Miss   Cover  Branches    Miss   Cover
+------------------------------------------------------------------------------------------------------------------------------------------
+SkipList::shouldInsertAtHigherLevel() const                          1       0 100.00%         3       0 100.00%         0       0   0.00%
+operator<<(std::ostream&, SkipList const&)                           6       0 100.00%        12       0 100.00%         4       0 100.00%
+SNode::SNode(int)                                                    1       0 100.00%         1       0 100.00%         0       0   0.00%
+SNode::SNode(SNode const&)                                           1       1   0.00%         4       4   0.00%         0       0   0.00%
+SkipList::SkipList(int, int)                                         4       0 100.00%         8       0 100.00%         2       0 100.00%
+SkipList::SkipList(SkipList const&)                                  9       0 100.00%        18       0 100.00%         6       0 100.00%
+SkipList::~SkipList()                                                3       0 100.00%        10       0 100.00%         2       0 100.00%
+SkipList::getBeforeNodes(int) const                                 10       0 100.00%        12       0 100.00%         8       1  87.50%
+SkipList::add(int)                                                  20       2  90.00%        25       2  92.00%        16       5  68.75%
+SkipList::add(std::vector<int, std::allocator<int> > const&)         4       0 100.00%         5       0 100.00%         2       0 100.00%
+SkipList::remove(int)                                               12       0 100.00%        21       0 100.00%         8       1  87.50%
+SkipList::contains(int) const                                       13       0 100.00%        13       0 100.00%        10       0 100.00%
+------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                               84       3  96.43%       132       6  95.45%        58       7  87.93%
+/home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/main.cpp:
+    1|       |#include "skiplist.h"
+    2|       |#include <cassert>
+    3|       |#include <iostream>
+    4|       |#include <sstream>
+    5|       |
+    6|       |using namespace std;
+    7|       |
+    8|       |// ************************************
+    9|       |// IMPORTANT: The below tests use Random::random to get random numbers, so
+   10|       |// adding more tests (or removing tests) will change how the SkipList is
+   11|       |// structured! Calling Random::random unnecessarily may also break tests.
+   12|       |// On the plus side, each run uses the same random numbers which makes
+   13|       |// debugginng easier.
+   14|       |// ************************************
+   15|       |
+   16|       |// testing basic operations: operator<<, add, contains
+   17|      1|void test1() {
+   18|      1|  stringstream outSS;
+   19|      1|  SkipList skp;
+   20|      1|  skp.add(3);
+   21|      1|  outSS << skp;
+   22|       |
+   23|      1|  assert(outSS.str() == "[level: 1] 3-->nullptr\n");
+   24|       |
+   25|      0|  skp.add(9);
+   26|      1|  outSS.str("");
+   27|      1|  outSS << skp;
+   28|       |
+   29|      1|  assert(outSS.str() == "[level: 1] 3-->9-->nullptr\n");
+   30|       |
+   31|      0|  skp.add(1);
+   32|      1|  outSS.str("");
+   33|      1|  outSS << skp;
+   34|       |
+   35|      1|  assert(outSS.str() == "[level: 1] 1-->3-->9-->nullptr\n");
+   36|       |
+   37|      0|  skp.add(vector<int>{7, 5});
+   38|      1|  outSS.str("");
+   39|      1|  outSS << skp;
+   40|       |
+   41|      1|  assert(outSS.str() == "[level: 1] 1-->3-->5-->7-->9-->nullptr\n");
+   42|       |
+   43|      0|  assert(skp.contains(1) && skp.contains(7) && skp.contains(9));
+   44|      0|  assert(!skp.contains(0) && !skp.contains(20));
+   45|       |
+   46|       |  // TODO(student) check there are no memory leaks after test completed
+   47|      0|  cout << "test1 done." << endl;
+   48|      1|}
+   49|       |
+   50|       |// testing the copy constructor for the SkipList
+   51|      1|void test2() {
+   52|      1|  stringstream outSS;
+   53|      1|  SkipList *skp1 = new SkipList;
+   54|      1|  skp1->add(vector<int>{9, 1, 7, 5});
+   55|       |
+   56|      1|  outSS.str("");
+   57|      1|  outSS << *skp1;
+   58|      1|  assert(outSS.str() == "[level: 1] 1-->5-->7-->9-->nullptr\n");
+   59|       |
+   60|      0|  SkipList *skp2 = new SkipList(*skp1);
+   61|      1|  delete skp1;
+   62|      1|  outSS.str("");
+   63|      1|  outSS << *skp2;
+   64|      1|  assert(outSS.str() == "[level: 1] 1-->5-->7-->9-->nullptr\n");
+   65|      0|  delete skp2;
+   66|       |  // TODO(student) check there are no memory leaks after test completed
+   67|      1|  cout << "test2 done." << endl;
+   68|      1|}
+   69|       |
+   70|       |// testing SkipList with multiple levels
+   71|      1|void test3() {
+   72|      1|  stringstream outSS;
+   73|      1|  SkipList skp(3, 80);
+   74|      1|  skp.add(vector<int>{9, 1, 7, 5, 3, 20});
+   75|       |
+   76|      1|  outSS << skp;
+   77|      1|  assert(outSS.str() == "[level: 3] 7-->nullptr\n"
+   78|      1|                        "[level: 2] 3-->7-->nullptr\n"
+   79|      1|                        "[level: 1] 1-->3-->5-->7-->9-->20-->nullptr\n");
+   80|       |
+   81|      0|  skp.add(vector<int>{-20, 100});
+   82|      1|  outSS.str("");
+   83|      1|  outSS << skp;
+   84|      1|  assert(outSS.str() ==
+   85|      1|         "[level: 3] -20-->7-->100-->nullptr\n"
+   86|      1|         "[level: 2] -20-->3-->7-->100-->nullptr\n"
+   87|      1|         "[level: 1] -20-->1-->3-->5-->7-->9-->20-->100-->nullptr\n");
+   88|       |
+   89|       |  // TODO(student) check that contains searches from top level down
+   90|      0|  assert(skp.contains(1) && skp.contains(7) && skp.contains(9));
+   91|      0|  assert(!skp.contains(0) && !skp.contains(200));
+   92|      0|  assert(skp.contains(-20) && skp.contains(100));
+   93|       |
+   94|      0|  SkipList skp2(3, 30);
+   95|      1|  skp2.add(vector<int>{9, 1, 7, 5, 3, 20});
+   96|      1|  outSS.str("");
+   97|      1|  outSS << skp2;
+   98|      1|  assert(outSS.str() == "[level: 3] nullptr\n"
+   99|      1|                        "[level: 2] 3-->5-->nullptr\n"
+  100|      1|                        "[level: 1] 1-->3-->5-->7-->9-->20-->nullptr\n");
+  101|       |
+  102|      0|  assert(skp2.contains(3) && skp2.contains(5) && skp2.contains(20));
+  103|      0|  assert(!skp2.contains(-3) && !skp2.contains(4) && !skp2.contains(200));
+  104|       |  // TODO(student) check there are no memory leaks after test completed
+  105|      0|  cout << "test3 done." << endl;
+  106|      1|}
+  107|       |
+  108|       |// removing from multi-level SkipList
+  109|      1|void test4() {
+  110|      1|  stringstream outSS;
+  111|      1|  SkipList skp(3, 50);
+  112|      1|  skp.add(vector<int>{9, 1, 7, 5, 3, 20});
+  113|       |
+  114|      1|  outSS << skp;
+  115|      1|  assert(outSS.str() == "[level: 3] 20-->nullptr\n"
+  116|      1|                        "[level: 2] 3-->5-->7-->9-->20-->nullptr\n"
+  117|      1|                        "[level: 1] 1-->3-->5-->7-->9-->20-->nullptr\n");
+  118|      0|  SkipList skp2(skp);
+  119|      1|  assert(skp.remove(1));
+  120|      0|  assert(!skp.remove(100));
+  121|      0|  assert(skp.remove(9));
+  122|       |
+  123|      0|  outSS.str("");
+  124|      1|  outSS << skp;
+  125|      1|  assert(outSS.str() == "[level: 3] 20-->nullptr\n"
+  126|      1|                        "[level: 2] 3-->5-->7-->20-->nullptr\n"
+  127|      1|                        "[level: 1] 3-->5-->7-->20-->nullptr\n");
+  128|       |
+  129|       |  // skp2 should be unchanged
+  130|      0|  outSS.str("");
+  131|      1|  outSS << skp2;
+  132|      1|  assert(outSS.str() == "[level: 3] 20-->nullptr\n"
+  133|      1|                        "[level: 2] 3-->5-->7-->9-->20-->nullptr\n"
+  134|      1|                        "[level: 1] 1-->3-->5-->7-->9-->20-->nullptr\n");
+  135|       |  // TODO(student) check there are no memory leaks after test completed
+  136|      0|  cout << "test4 done." << endl;
+  137|      1|}
+  138|       |
+  139|      1|int main() {
+  140|      1|  test1();
+  141|      1|  test2();
+  142|      1|  test3();
+  143|      1|  test4();
+  144|      1|  cout << "Done." << endl;
+  145|      1|  return 0;
+  146|      1|}
+
+/home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/random.cpp:
+    1|       |#include "random.h"
+    2|       |#include <vector>
+    3|       |
+    4|     31|int Random::random() {
+    5|     31|  if (counter >= NUMS.size()) {
+    6|      0|    counter = 0;
+    7|      0|  }
+    8|     31|  return NUMS[counter++];
+    9|     31|}
+   10|       |
+   11|       |int Random::counter = 0;
+   12|       |
+   13|       |const vector<int> Random::NUMS = {
+   14|       |    1804289383, 846930886,  1681692777, 1714636915, 1957747793, 424238335,
+   15|       |    719885386,  1649760492, 596516649,  1189641421, 1025202362, 1350490027,
+   16|       |    783368690,  1102520059, 2044897763, 1967513926, 1365180540, 1540383426,
+   17|       |    304089172,  1303455736, 35005211,   521595368,  294702567,  1726956429,
+   18|       |    336465782,  861021530,  278722862,  233665123,  2145174067, 468703135,
+   19|       |    1101513929, 1801979802, 1315634022, 635723058,  1369133069, 1125898167,
+   20|       |    1059961393, 2089018456, 628175011,  1656478042, 1131176229, 1653377373,
+   21|       |    859484421,  1914544919, 608413784,  756898537,  1734575198, 1973594324,
+   22|       |    149798315,  2038664370, 1129566413, 184803526,  412776091,  1424268980,
+   23|       |    1911759956, 749241873,  137806862,  42999170,   982906996,  135497281,
+   24|       |    511702305,  2084420925, 1937477084, 1827336327, 572660336,  1159126505,
+   25|       |    805750846,  1632621729, 1100661313, 1433925857, 1141616124, 84353895,
+   26|       |    939819582,  2001100545, 1998898814, 1548233367, 610515434,  1585990364,
+   27|       |    1374344043, 760313750,  1477171087, 356426808,  945117276,  1889947178,
+   28|       |    1780695788, 709393584,  491705403,  1918502651, 752392754,  1474612399,
+   29|       |    2053999932, 1264095060, 1411549676, 1843993368, 943947739,  1984210012,
+   30|       |    855636226,  1749698586, 1469348094, 1956297539
+   31|       |
+   32|       |};
+
+/home/cssuwbstudent/2021au342d-p4-skiplist-iZyns/skiplist.cpp:
+    1|       |#include "skiplist.h"
+    2|       |#include "random.h"
+    3|       |#include <cassert>
+    4|       |#include <climits>
+    5|       |#include <cstdlib>
+    6|       |#include <iostream>
+    7|       |#include <unordered_map>
+    8|       |
+    9|       |using namespace std;
+   10|       |
+   11|       |// checks if the value needs to be inserted at a higher level
+   12|     31|bool SkipList::shouldInsertAtHigherLevel() const {
+   13|     31|  return probability >= Random::random() % 100;
+   14|     31|}
+   15|       |
+   16|       |// you code goes here
+   17|       |
+   18|       |// skiplist ostream
+   19|     12|ostream &operator<<(ostream &out, const SkipList &skip) {
+   20|     36|  for (int i = skip.levels - 1; i >= 0; i--) {
+   21|     24|    out << "[level: " << i + 1 << "] ";
+   22|     24|    SNode *curr = skip.head->next[i];
+   23|    108|    while (curr != nullptr) {
+   24|     84|      out << curr->val << "-->";
+   25|     84|      curr = curr->next[i];
+   26|     84|    }
+   27|     24|    out << "nullptr" << endl;
+   28|     24|  }
+   29|     12|  return out;
+   30|     12|}
+   31|       |// constructor
+   32|     52|SNode::SNode(int val) : val{val} { next.resize(3); }
+   33|       |// copy constructor
+   34|      0|SNode::SNode(const SNode &other) {
+   35|      0|  val = other.val;
+   36|      0|  next = other.next;
+   37|      0|}
+   38|       |
+   39|      5|SkipList::SkipList(int levels, int probability) {
+   40|      5|  this->levels = levels;
+   41|      5|  this->probability = probability;
+   42|      5|  head = new SNode;
+   43|     16|  for (int i = 0; i < levels; i++) {
+   44|     11|    head->next.push_back(nullptr);
+   45|     11|  }
+   46|      5|}
+   47|       |
+   48|       |// copy constructor
+   49|      2|SkipList::SkipList(const SkipList &other) {
+   50|      2|  levels = other.levels;
+   51|      2|  probability = other.probability;
+   52|      2|  head = new SNode{other.head->val};
+   53|      6|  for (int i = 0; i < levels; i++) {
+   54|      4|    head->next.push_back(nullptr);
+   55|      4|  }
+   56|      6|  for (int i = levels - 1; i >= 0; i--) {
+   57|      4|    SNode *temp = other.head->next[i];
+   58|      4|    SNode *newHead = head;
+   59|     20|    while (temp != nullptr) {
+   60|     16|      SNode *curr = new SNode{temp->val};
+   61|     16|      newHead->next[i] = curr;
+   62|     16|      temp = temp->next[i];
+   63|     16|      newHead = newHead->next[i];
+   64|     16|    }
+   65|      4|  }
+   66|      2|}
+   67|       |
+   68|      7|SkipList::~SkipList() {
+   69|      7|  SNode *temp = head;
+   70|      7|  SNode *next;
+   71|     51|  while (temp != nullptr) {
+   72|     44|    next = temp->next[0];
+   73|     44|    delete temp;
+   74|     44|    temp = next;
+   75|     44|  }
+   76|      7|  head = nullptr;
+   77|      7|}
+   78|       |
+   79|     31|vector<SNode *> SkipList::getBeforeNodes(int val) const {
+   80|     31|  vector<SNode *> prevNode;
+   81|    106|  for (int i = 0; i < levels; i++) {
+   82|     75|    SNode *start = head;
+   83|    133|    while (start != nullptr && start->next[i] != nullptr &&
+   84|    133|           start->next[i]->val < val) {
+   85|     58|      start = start->next[i];
+   86|     58|    }
+   87|     75|    prevNode.push_back(start);
+   88|     75|  }
+   89|     31|  return prevNode;
+   90|     31|}
+   91|       |
+   92|     29|void SkipList::add(int val) {
+   93|     29|  SNode *start = head;
+   94|     29|  SNode *insertVal = new SNode{val};
+   95|     29|  vector<SNode *> prevNode = getBeforeNodes(val);
+   96|     29|  for (int i = 0; i < levels; i++) {
+   97|     29|    start = prevNode[i];
+   98|     29|    while (start != nullptr) {
+   99|       |      // if (start->val == prevNode[i]->val) {
+  100|     29|      insertVal->next[i] = start->next[i];
+  101|     29|      start->next[i] = insertVal;
+  102|     29|      start = start->next[i]; // at inserted node
+  103|     44|      while (i < levels - 1 && shouldInsertAtHigherLevel()) {
+  104|     15|        i = i + 1;
+  105|     15|        SNode *curr = prevNode[i];
+  106|     15|        if (curr->val == prevNode[i]->val && curr->next[i] != nullptr) {
+  107|      7|          insertVal->next[i] = curr->next[i];
+  108|      7|          curr->next[i] = start;
+  109|      8|        } else if (curr->val == prevNode[i]->val && curr->next[i] == nullptr) {
+  110|      8|          curr->next[i] = start;
+  111|      8|        }
+  112|     15|      }
+  113|     29|      return;
+  114|     29|    }
+  115|     29|  }
+  116|      0|  delete insertVal;
+  117|      0|}
+  118|       |
+  119|      6|void SkipList::add(const vector<int> &values) {
+  120|     32|  for (int i = 0; i < values.size(); i++) {
+  121|     26|    add(values[i]);
+  122|     26|  }
+  123|      6|}
+  124|       |
+  125|      3|bool SkipList::remove(int val) {
+  126|      3|  if (!contains(val)) {
+  127|      1|    return false;
+  128|      1|  }
+  129|      2|  SNode *start;
+  130|      2|  SNode *removeVal = nullptr;
+  131|      2|  vector<SNode *> prevNode = getBeforeNodes(val);
+  132|      2|  bool success = false;
+  133|      8|  for (int i = levels - 1; i >= 0; i--) {
+  134|      6|    start = prevNode[i];
+  135|      6|    if (start->val == prevNode[i]->val && start->next[i]->val == val) {
+  136|      3|      removeVal = start->next[i];
+  137|      3|      start->next[i] = start->next[i]->next[i];
+  138|      3|      success = true;
+  139|      3|    } else {
+  140|      3|      start = start->next[i];
+  141|      3|    }
+  142|      6|  }
+  143|      2|  delete removeVal;
+  144|      2|  return success;
+  145|      3|}
+  146|       |
+  147|     21|bool SkipList::contains(int val) const {
+  148|     52|  for (int i = levels - 1; i >= 0; i--) {
+  149|     44|    SNode *start = head;
+  150|     44|    start = start->next[i];
+  151|    123|    while (start != nullptr && start->val < val) {
+  152|     79|      start = start->next[i];
+  153|     79|    }
+  154|     44|    if (start != nullptr && start->val == val) {
+  155|     13|      return true;
+  156|     13|    }
+  157|     44|  }
+  158|      8|  return false;
+  159|     21|}
+
+Mon Nov 28 00:37:22 UTC 2022
+=====================================================
+To create an output.txt file with all the output from this script
+Run the below command
+      ./create-output.sh > output.txt 2>&1 
+=====================================================
